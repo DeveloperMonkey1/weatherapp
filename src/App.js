@@ -97,6 +97,10 @@ function App() {
       ) : (
         <p className="text-lg">Loading weather data...</p>
       )}
+
+      <h3>자연과학대학 물리학과 
+      <p>전우영</p>  
+      <p>지도교수 제숭근</p></h3>
     
       </div>
       </div>
