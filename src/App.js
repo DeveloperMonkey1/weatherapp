@@ -9,6 +9,7 @@ function App() {
   const [temperature, setTemperature] = useState(null);  // 온도(T1H) 값
   const [humdity, setHumdity] = useState(null); //
   const [precipitation, setPrecipitation] = useState(null); //
+  const apikey = process.env.REACT_APP_API_KEY;
 
   // searchLocation 함수 정의
   const searchLocation = (event) => {
@@ -26,9 +27,10 @@ function App() {
       const year = today.getFullYear();
       const month = String(today.getMonth() + 1).padStart(2, 0);
       const day = String(today.getDate()).padStart(2,0);
+      
 
       const formattedDate = `${year}${month}${day}`;
-      const url = `/api/typ02/openApi/VilageFcstInfoService_2.0/getUltraSrtNcst?pageNo=1&numOfRows=10&dataType=JSON&base_date=${formattedDate}&base_time=1200&nx=${parsedX}&ny=${parsedY}&authKey=XIDHRQuXTDmAx0ULlww5uQ`;
+      const url = `/api/typ02/openApi/VilageFcstInfoService_2.0/getUltraSrtNcst?pageNo=1&numOfRows=10&dataType=JSON&base_date=${formattedDate}&base_time=1200&nx=${parsedX}&ny=${parsedY}&authKey=${apikey}`;
 
       axios.get(url)
         .then((response) => {
@@ -83,13 +85,13 @@ function App() {
       />
      
       </div>
-      <div class="grid grid-cols-3 gap-3"> 
-      <div class="w-120">
+      <div className="grid grid-cols-3 gap-3"> 
+      <div className="w-120">
      
       {temperature && precipitation ? (
         <div className="flex flex-row justify-between">
           <div className="flex flex-col">
-            <h1 className="text-8xl font-bold">Today's Temperature: {temperature}°C</h1>
+            <h1 className="font-bold text-8xl">Today's Temperature: {temperature}°C</h1>
             <h2 className="text-5xl">Today's Humidity: {humdity}%</h2>
           </div>
           <h3 className="text-5xl">Today's Precipitation: {precipitation}mm</h3>
